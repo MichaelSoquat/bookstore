@@ -1,1 +1,9 @@
-<p>nav works!</p>
+<mat-drawer-container class="nav-bar-container">
+    <mat-drawer mode="side" [opened]="isNavOpen">
+        <button routerLink="neuerNutzer" class="button" mat-raised-button color="accent">Nutzer hinzufügen</button>
+        <div *ngFor="let user of users">
+                <button [ngStyle]="{'background-color': user.color}" class="button" mat-raised-button color="accent">{{user.name}}</button>
+        </div>
+    </mat-drawer>
+    <app-main></app-main>
+  </mat-drawer-container>
