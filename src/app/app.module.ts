@@ -31,8 +31,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { booksReducer } from './state/books.reducer';
+import { BooksEffects } from './state/books.effects';
 
 
 @NgModule({
@@ -59,7 +63,9 @@ import {MatSortModule} from '@angular/material/sort';
     MatToolbarModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    StoreModule.forRoot({ books: booksReducer }),
+    EffectsModule.forRoot([BooksEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

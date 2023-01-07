@@ -2,7 +2,7 @@ import { Rating } from "../enums/rating";
 import { Read } from "../enums/read";
 
 
-export interface Book {
+export interface IBook {
     id: number;
     title: string;
     author: string;

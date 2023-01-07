@@ -5,7 +5,12 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Rating } from 'src/app/models/enums/rating';
 import { Read } from 'src/app/models/enums/read';
-import { Book } from 'src/app/models/interfaces/book';
+import { IBook } from 'src/app/models/interfaces/book';
+import * as BooksActions from '../../../state/books.actions';
+import { Store } from '@ngrx/store';
+import { selectBooksState } from 'src/app/state/books.selectors';
+import { Observable, Subscription } from 'rxjs';
+import { BooksState } from 'src/app/state/books.reducer';
 
 @Component({
   selector: 'app-main',
@@ -17,22 +22,36 @@ import { Book } from 'src/app/models/interfaces/book';
 export class MainComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  books: Book[] = [
-    { id: 1, title: 'The Lord of the Rings', author: 'J.R.R. Tolkien', genre: 'Fantasy', buyedAt: '2021-01-01', price: 20, isRead: Read.yes, rating: Rating.zero, notice: 'Eine kurze Notiz', description: 'Eine kurze Beschreibung' },
-    { id: 2, title: 'The Hobbit', author: 'J.R.R. Tolkien', genre: 'Fantasy', buyedAt: '2021-01-01', price: 40, isRead: Read.no, rating: Rating.five, notice: 'Eine kurze Notiz', description: 'Eine kurze Beschreibung' },
-
-  ]
+  books!: IBook[];
   displayedColumns: string[] = ['id', 'title', 'author', 'genre', 'buyedAt', 'price', 'isRead', 'rating', 'notice', 'description'];
-  dataSource = new MatTableDataSource<any>(this.books);
-
-  constructor() { }
+  dataSource!: MatTableDataSource<IBook[]>;
+  books$: Observable<BooksState | unknown> = this.store.select(selectBooksState);
+  bookSubscription!: Subscription;
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.subscribeToBooks();
+    this.fetchBooks();
     this.dataSource.sort = this.sort;
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  subscribeToBooks() {
+    this.bookSubscription = this.books$.subscribe((books: any) => {
+      if (books) {
+        console.log(books)
+        this.books = books.books;
+        this.dataSource = new MatTableDataSource<any>(this.books);
+        this.dataSource.paginator = this.paginator;
+      }
+    });
+  }
+
+  fetchBooks() {
+    this.store.dispatch(BooksActions.getBooks());
   }
 
   addBook() {
@@ -49,6 +68,10 @@ export class MainComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  ngOnDestroy() {
+    this.bookSubscription.unsubscribe();
   }
 
 }

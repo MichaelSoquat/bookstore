@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/models/interfaces/user';
+import { IUser } from 'src/app/models/interfaces/user';
 
 @Component({
   selector: 'app-nav',
@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
   @ViewChild('sidenav') matSidenav!: MatSidenav;
   isSidenavOpen: boolean = false;
 
-  users: User[] = [
+  users: IUser[] = [
     { name: 'Natalie', color: 'green' },
     { name: 'Samira', color: 'blue' },
     { name: 'Amina', color: 'pink' },
