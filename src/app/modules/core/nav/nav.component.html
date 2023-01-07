@@ -1,9 +1,10 @@
-<mat-drawer-container class="nav-bar-container">
-    <mat-drawer mode="side" [opened]="isNavOpen">
-        <button routerLink="neuerNutzer" class="button" mat-raised-button color="accent">Nutzer hinzufügen</button>
+<mat-sidenav-container class="nav-container">
+    <mat-sidenav #sidenav mode="side" opened="true" class="nav-content">
+        <button routerLink="neuerNutzer" class="user-add-button" mat-raised-button color="accent">Nutzer
+            hinzufügen<mat-icon>add</mat-icon></button>
         <div *ngFor="let user of users">
-                <button [ngStyle]="{'background-color': user.color}" class="button" mat-raised-button color="accent">{{user.name}}</button>
+            <button [ngStyle]="{'background-color': user.color}" mat-raised-button color="accent">{{user.name}}</button>
         </div>
-    </mat-drawer>
+    </mat-sidenav>
     <app-main></app-main>
-  </mat-drawer-container>
+</mat-sidenav-container>

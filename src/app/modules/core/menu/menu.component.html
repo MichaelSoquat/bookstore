@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+    <div class="menu-container">
+        <button mat-icon-button (click)="checkSidenavStatus()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1>Bücherliste</h1>
+        <app-user-info></app-user-info>
+    </div>
+    <mat-menu #menu="matMenu">
+        <mat-icon>person</mat-icon>
+    </mat-menu>
+</mat-toolbar>
+
+<app-nav [sidenavStatus$]="sidenavStatus.asObservable()"></app-nav>

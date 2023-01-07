@@ -1,9 +1,24 @@
-.nav-bar-container {
-    height: 100vh;
-    text-align: center;
+
+.nav-container {
+    position: absolute;
+    top: 64;
+    left: 0;
+    height: calc(100% - 64px);
+    overflow: hidden;
+    
 }
 
-.button {
-    margin:16px;
+.nav-content {
+    width: 250px;
+    background-color: #3f51b5;
+    overflow: hidden;
+
+    .user-add-button {
+        margin-top: 32px !important;
+    }
+    button {
+        width: 200px;
+        margin: 16px;
+    }
 }
 

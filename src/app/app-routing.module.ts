@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NavComponent } from './modules/core/nav/nav.component';
+import { MenuComponent } from './modules/core/menu/menu.component';
 import { NewUserComponent } from './modules/core/new-user/new-user.component';
 
 const routes: Routes = [
-  { path: '', component: NavComponent },
+  { path: '', component: MenuComponent },
   { path: 'neuerNutzer', component: NewUserComponent },
 ];
 

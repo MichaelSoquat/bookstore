@@ -15,6 +15,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import { MenuComponent } from './modules/core/menu/menu.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { UserInfoComponent } from './modules/core/user-info/user-info.component';
 
 
 @NgModule({
@@ -22,7 +25,9 @@ import {MatInputModule} from '@angular/material/input';
     AppComponent,
     NavComponent,
     MainComponent,
-    NewUserComponent
+    NewUserComponent,
+    MenuComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,8 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
