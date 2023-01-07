@@ -15,4 +15,15 @@
     width: 100%;
   }
 
+  .action-icons {
+    margin: 2px;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2); 
+    }
+    &:active {
+      transform: scale(0.8); 
+    }
+  }
+
 

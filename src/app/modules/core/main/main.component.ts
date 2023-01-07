@@ -23,7 +23,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   books!: IBook[];
-  displayedColumns: string[] = ['id', 'title', 'author', 'genre', 'buyedAt', 'price', 'isRead', 'rating', 'notice', 'description'];
+  displayedColumns: string[] = ['id', 'title', 'author', 'genre', 'buyedAt', 'price', 'isRead', 'rating', 'notice', 'description', 'actions'];
   dataSource!: MatTableDataSource<IBook[]>;
   books$: Observable<BooksState | unknown> = this.store.select(selectBooksState);
   bookSubscription!: Subscription;
@@ -68,6 +68,14 @@ export class MainComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  editBook(id: number) {
+    // edit book --> edit page with form
+  }
+
+  deleteBook(id: number) {
+    // delete book --> confirmation dialog
   }
 
   ngOnDestroy() {
