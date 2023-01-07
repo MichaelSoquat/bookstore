@@ -1,3 +1,7 @@
+import { Rating } from "../enums/rating";
+import { Read } from "../enums/read";
+
+
 export interface Book {
     id: number;
     title: string;
@@ -5,8 +9,8 @@ export interface Book {
     genre: string;
     buyedAt: string;
     price: number;
-    isRead: boolean;
-    rating: number;
+    isRead: Read;
+    rating: Rating;
     notice: string;
     description: string;
 }
