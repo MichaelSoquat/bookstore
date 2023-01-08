@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { BookService } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,9 +12,14 @@ export class MenuComponent implements OnInit {
   sidenavStatus: Subject<boolean> = new Subject<boolean>();
   isSidenavOpen: boolean = false;
 
-  constructor() { }
+  constructor(private bookService:BookService) { }
 
   ngOnInit(): void {
+    this.bookService.getBooks().subscribe(data => {
+      console.log(data);
+    }
+    );
+
   }
 
   checkSidenavStatus() {

@@ -37,6 +37,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { booksReducer } from './state/books.reducer';
 import { BooksEffects } from './state/books.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { BooksEffects } from './state/books.effects';
     MatPaginatorModule,
     MatSortModule,
     StoreModule.forRoot({ books: booksReducer }),
-    EffectsModule.forRoot([BooksEffects])
+    EffectsModule.forRoot([BooksEffects]),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
