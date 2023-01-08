@@ -23,7 +23,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   books!: IBook[];
-  displayedColumns: string[] = ['id', 'title', 'author', 'genre', 'buyedAt', 'buy_place', 'normal_price', 'payed', 'isRead', 'rating', 'notice', 'description', 'actions'];
+  displayedColumns: string[] = ['id', 'title', 'author', 'genre', 'buyedAt', 'buy_place', 'normal_price', 'payed', 'isRead', 'rating', 'notice', 'description',];
   dataSource!: MatTableDataSource<IBook[]>;
   books$: Observable<BooksState | unknown> = this.store.select(selectBooksState);
   bookSubscription!: Subscription;
