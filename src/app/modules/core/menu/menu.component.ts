@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { BookService } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-menu',

@@ -38,6 +38,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { booksReducer } from './state/books.reducer';
 import { BooksEffects } from './state/books.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { NewBookComponent } from './modules/core/new-book/new-book.component';
+import { EditBookComponent } from './modules/core/edit-book/edit-book.component';
+import { DeleteBookComponent } from './modules/core/delete-book/delete-book.component';
 
 
 @NgModule({
@@ -47,7 +50,10 @@ import { HttpClientModule } from '@angular/common/http';
     MainComponent,
     NewUserComponent,
     MenuComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    NewBookComponent,
+    EditBookComponent,
+    DeleteBookComponent
   ],
   imports: [
     BrowserModule,
