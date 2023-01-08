@@ -9,9 +9,6 @@ import { DateAdapter } from '@angular/material/core';
 })
 export class NewBookComponent implements OnInit {
   checked = false;
-  indeterminate = false;
-  labelPosition: 'before' | 'after' = 'after';
-  disabled = false;
   bookForm: any;
 
   constructor(private fb:FormBuilder, private dateAdapter:DateAdapter<Date>) { }
@@ -27,6 +24,7 @@ export class NewBookComponent implements OnInit {
       notice: '',
       rating: '',
       is_read: '',
+      buy_place: '',
       
     });
   }
