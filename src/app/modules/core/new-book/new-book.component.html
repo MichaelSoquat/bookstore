@@ -1,4 +1,4 @@
-<form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()" method="post" class="form">
     <div class="part-form">
         <mat-form-field appearance="outline">
             <mat-label>Titel</mat-label>
@@ -54,7 +54,7 @@
 
         <div class="checkbox">
             <mat-label>Bereits gelesen?</mat-label>
-            <mat-checkbox formControlName="is_read" class="example-margin" [(ngModel)]="checked">
+            <mat-checkbox formControlName="is_read" class="example-margin">
             </mat-checkbox>
         </div>
 
@@ -81,5 +81,7 @@
         </mat-form-field>
     </div>
 </form>
-
-<button mat-raised-button type="submit" class="form-button">Buch hinzufügen</button>
+<div class="button-container">
+    <button mat-raised-button type="submit">Buch hinzufügen</button>
+    <button mat-raised-button type="click" routerLink="/">Zurück</button>
+</div>

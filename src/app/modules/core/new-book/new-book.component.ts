@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 
 @Component({
@@ -8,24 +8,23 @@ import { DateAdapter } from '@angular/material/core';
   styleUrls: ['./new-book.component.scss']
 })
 export class NewBookComponent implements OnInit {
-  checked = false;
-  bookForm: any;
-
+  bookForm!: FormGroup;
   constructor(private fb:FormBuilder, private dateAdapter:DateAdapter<Date>) { }
 
   ngOnInit(): void {
     this.bookForm = this.fb.group({
       title: '',
       author: '',
-      genre: '',
-      price: '',
+      genre: '', 
       buyed_at: '',
       description: '',
       notice: '',
       rating: '',
       is_read: '',
       buy_place: '',
-      
+      payed: '',
+      normal_price: '',
+
     });
   }
 

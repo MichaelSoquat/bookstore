@@ -22,3 +22,11 @@ form {
     justify-content: center;
     align-items: center;
 }
+
+.button-container {
+    display: flex;
+    
+    button {
+        margin: 16px;
+    }
+}
