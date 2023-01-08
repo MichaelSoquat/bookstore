@@ -54,13 +54,6 @@ export class MainComponent implements OnInit, AfterViewInit {
     this.store.dispatch(BooksActions.getBooks());
   }
 
-  addBook() {
-    // add book --> new page with form
-    this.books.push({ id: 3, title: 'The Hobbit', author: 'J.R.R. Tolkien', genre: 'Fantasy', buyedAt: '2021-01-01', price: 40, isRead: Read.no, rating: Rating.five, notice: 'Eine kurze Notiz', description: 'Eine kurze Beschreibung' });
-    this.dataSource = new MatTableDataSource<any>(this.books);
-    this.dataSource.paginator = this.paginator;
-  }
-
   sortData(event: any) {
     this.dataSource.sort = this.sort;
   }
