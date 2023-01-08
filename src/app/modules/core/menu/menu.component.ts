@@ -12,14 +12,10 @@ export class MenuComponent implements OnInit {
   sidenavStatus: Subject<boolean> = new Subject<boolean>();
   isSidenavOpen: boolean = false;
 
-  constructor(private bookService:BookService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe(data => {
-      console.log(data);
-    }
-    );
-
+  
   }
 
   checkSidenavStatus() {
