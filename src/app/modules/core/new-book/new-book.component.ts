@@ -9,13 +9,13 @@ import { DateAdapter } from '@angular/material/core';
 })
 export class NewBookComponent implements OnInit {
   bookForm!: FormGroup;
-  constructor(private fb:FormBuilder, private dateAdapter:DateAdapter<Date>) { }
+  constructor(private fb: FormBuilder, private dateAdapter: DateAdapter<Date>) { }
 
   ngOnInit(): void {
     this.bookForm = this.fb.group({
       title: '',
       author: '',
-      genre: '', 
+      genre: '',
       buyed_at: '',
       description: '',
       notice: '',
@@ -29,9 +29,6 @@ export class NewBookComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('onSubmit()');
+    console.log(this.bookForm.value);
   }
-
-    
-
-  }
+}

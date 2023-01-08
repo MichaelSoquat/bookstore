@@ -8,9 +8,11 @@ export interface IBook {
     author: string;
     genre: string;
     buyedAt: string;
-    price: number;
     isRead: Read;
     rating: Rating;
     notice: string;
     description: string;
+    buy_place: string;
+    payed: number;
+    normal_price: number;
 }
