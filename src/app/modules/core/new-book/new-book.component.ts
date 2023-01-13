@@ -7,6 +7,8 @@ import { IBook } from 'src/app/models/interfaces/book';
 import { Observable } from 'rxjs';
 import { Read } from 'src/app/models/enums/read';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
+import { BookActionTypes } from 'src/app/models/enums/bookActions';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class NewBookComponent implements OnInit {
   bookForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private dateAdapter: DateAdapter<Date>, private bookService: BookService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar, private store: Store) { }
 
   ngOnInit(): void {
     this.bookForm = this.fb.group({
@@ -42,14 +44,11 @@ export class NewBookComponent implements OnInit {
   onSubmit() {
     const serializedBook = this.createNewBook().serializedBook;
     const sendableForm = this.changeReadAndDate(serializedBook);
-    this.bookService.addBook(sendableForm).subscribe((book: IBook) => {
-      console.log(book);
-      this.bookForm.reset();
-      this._snackBar.open('Buch erfolgreich hinzugefügt!', "Ok", {
-        duration: 2000,
-      });
-    }
-    );
+    this.store.dispatch({ type: BookActionTypes.AddBook, payload: sendableForm });
+    this.bookForm.reset();
+    this._snackBar.open('Buch erfolgreich hinzugefügt!', "Ok", {
+      duration: 2000,
+    });
   }
 
   changeReadAndDate(serializedBook: IBook): IBook {

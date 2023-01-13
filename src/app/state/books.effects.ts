@@ -8,18 +8,26 @@ import { Read } from "../models/enums/read";
 import { Rating } from "../models/enums/rating";
 import { Book } from "../models/classes/book";
 import { BookService } from "../services/book.service";
+import { IBook } from "../models/interfaces/book";
 
 
 @Injectable()
 
 export class BooksEffects {
-    constructor(private actions$: Actions, private bookService:BookService) { }
+    constructor(private actions$: Actions, private bookService: BookService) { }
 
     getBooks$: Observable<Action> = createEffect(() => this.actions$.pipe(
-        ofType(getBooks), 
+        ofType(getBooks),
         switchMap(() => this.bookService.getBooks()),
         map((books: Book[]) => BooksActions.getBooksSuccess({ payload: books }))
     ));
 
-    
+    addBook$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(BooksActions.addBook),
+        switchMap((action) => this.bookService.addBook(action.payload)),
+        map((book: IBook) => BooksActions.addBookSuccess({ payload: book }))
+    ));
+
+
+
 }
