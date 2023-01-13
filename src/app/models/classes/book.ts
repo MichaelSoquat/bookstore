@@ -7,8 +7,8 @@ export class Book implements IBook {
     title: string;
     author: string;
     genre: string;
-    buyedAt: string;
-    isRead: Read;
+    buyed_at: string;
+    is_read: Read;
     rating: Rating;
     notice: string;
     description: string;
@@ -16,14 +16,14 @@ export class Book implements IBook {
     payed: number;
     normal_price: number;
 
-    constructor(id: number, title: string, author: string, genre: string, buyedAt: string,
-        isRead: Read, rating: Rating, notice: string, description: string, buy_place: string, payed: number, normal_price: number) {
+    constructor(id: number, title: string, author: string, genre: string, buyed_at: string,
+        is_read: Read, rating: Rating, notice: string, description: string, buy_place: string, payed: number, normal_price: number) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.buyedAt = buyedAt;
-        this.isRead = isRead;
+        this.buyed_at = buyed_at;
+        this.is_read = is_read;
         this.rating = rating;
         this.notice = notice;
         this.description = description;
@@ -32,14 +32,13 @@ export class Book implements IBook {
         this.normal_price = normal_price;
     }
 
-    get serializedBook(): Partial<IBook> {
+    get serializedBook(): IBook {
         return {
-            
             title: this.title,
             author: this.author,
             genre: this.genre,
-            buyedAt: this.buyedAt,
-            isRead: this.isRead,
+            buyed_at: this.buyed_at,
+            is_read: this.is_read,
             rating: this.rating,
             notice: this.notice,
             description: this.description,

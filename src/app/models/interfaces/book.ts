@@ -3,12 +3,12 @@ import { Read } from "../enums/read";
 
 
 export interface IBook {
-    id: number;
+    id?: number;
     title: string;
     author: string;
     genre: string;
-    buyedAt: string;
-    isRead: Read;
+    buyed_at: string;
+    is_read: Read;
     rating: Rating;
     notice: string;
     description: string;

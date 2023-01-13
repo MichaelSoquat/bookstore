@@ -1,4 +1,4 @@
 export enum Read {
-    yes = 'Ja',
-    no = 'Nein'
+    yes = 'True',
+    no = 'False'
 }

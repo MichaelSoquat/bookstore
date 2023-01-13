@@ -4,6 +4,9 @@ import { DateAdapter } from '@angular/material/core';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from 'src/app/models/classes/book';
 import { IBook } from 'src/app/models/interfaces/book';
+import { Observable } from 'rxjs';
+import { Read } from 'src/app/models/enums/read';
+
 
 @Component({
   selector: 'app-new-book',
@@ -12,6 +15,7 @@ import { IBook } from 'src/app/models/interfaces/book';
 })
 export class NewBookComponent implements OnInit {
   bookForm!: FormGroup;
+
   constructor(private fb: FormBuilder, private dateAdapter: DateAdapter<Date>, private bookService: BookService) { }
 
   ngOnInit(): void {
@@ -31,16 +35,33 @@ export class NewBookComponent implements OnInit {
     });
   }
 
+
+
   onSubmit() {
     console.log(this.bookForm.value);
+
     const newBook = this.createNewBook();
     const serializedBook = newBook.serializedBook;
     console.log(serializedBook);
-    console.log(newBook)
-    this.bookService.addBook(serializedBook).subscribe((book: any) => {
+    const sendableForm = this.changeReadAndDate(serializedBook);
+    this.bookService.addBook(sendableForm).subscribe((book: IBook) => {
       console.log(book);
     }
     );
+  }
+
+  changeReadAndDate(serializedBook: IBook): IBook {
+    if (!serializedBook.is_read) {
+      serializedBook.is_read = Read.no;
+    };
+    const date = new Date(serializedBook.buyed_at);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const dateString = `${year}-${month}-${day}`;
+    serializedBook.buyed_at = dateString;
+
+    return serializedBook;
   }
 
   createNewBook(): Book {
