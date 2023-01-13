@@ -3,14 +3,13 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Rating } from 'src/app/models/enums/rating';
-import { Read } from 'src/app/models/enums/read';
 import { IBook } from 'src/app/models/interfaces/book';
 import * as BooksActions from '../../../state/books.actions';
 import { Store } from '@ngrx/store';
 import { selectBooksState } from 'src/app/state/books.selectors';
 import { Observable, Subscription } from 'rxjs';
 import { BooksState } from 'src/app/state/books.reducer';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-main',
@@ -27,7 +26,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   dataSource!: MatTableDataSource<IBook[]>;
   books$: Observable<BooksState | unknown> = this.store.select(selectBooksState);
   bookSubscription!: Subscription;
-  constructor(private store: Store) { }
+  constructor(private store: Store, private _snackBar: MatSnackBar,) { }
 
   ngOnInit(): void {
     this.subscribeToBooks();
@@ -68,7 +67,10 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   deleteBook(id: number) {
-    // delete book --> confirmation dialog
+    this.store.dispatch(BooksActions.deleteBook({ payload: id }));
+    this._snackBar.open(`Buch mit der Nummer ${id} gelöscht`, 'Ok', {
+      duration: 2000,
+    });
   }
 
   ngOnDestroy() {

@@ -4,8 +4,6 @@ import { Action } from "@ngrx/store";
 import { map, Observable, of, switchMap } from "rxjs";
 import { getBooks } from "./books.actions";
 import * as BooksActions from './books.actions';
-import { Read } from "../models/enums/read";
-import { Rating } from "../models/enums/rating";
 import { Book } from "../models/classes/book";
 import { BookService } from "../services/book.service";
 import { IBook } from "../models/interfaces/book";
@@ -28,6 +26,21 @@ export class BooksEffects {
         map((book: IBook) => BooksActions.addBookSuccess({ payload: book }))
     ));
 
+    addBookSuccess$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(BooksActions.addBookSuccess),
+        switchMap(() => this.bookService.getBooks()),
+        map((books: Book[]) => BooksActions.getBooksSuccess({ payload: books }))
+    ));
 
+    deleteBook$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(BooksActions.deleteBook),
+        switchMap((action) => this.bookService.deleteBook(action.payload)),
+        map((id: number) => BooksActions.deleteBookSuccess({ payload: id }))
+    ));
 
+    deleteBookSuccess$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(BooksActions.deleteBookSuccess),
+        switchMap(() => this.bookService.getBooks()),
+        map((books: Book[]) => BooksActions.getBooksSuccess({ payload: books }))
+    ));
 }
