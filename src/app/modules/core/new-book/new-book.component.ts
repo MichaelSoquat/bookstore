@@ -40,11 +40,7 @@ export class NewBookComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.bookForm.value);
-
-    const newBook = this.createNewBook();
-    const serializedBook = newBook.serializedBook;
-    console.log(serializedBook);
+    const serializedBook = this.createNewBook().serializedBook;
     const sendableForm = this.changeReadAndDate(serializedBook);
     this.bookService.addBook(sendableForm).subscribe((book: IBook) => {
       console.log(book);
@@ -71,21 +67,7 @@ export class NewBookComponent implements OnInit {
   }
 
   createNewBook(): Book {
-    const newBook = new Book(
-      1,
-      this.bookForm.value.title,
-      this.bookForm.value.author,
-      this.bookForm.value.genre,
-      this.bookForm.value.buyed_at.toString(),
-      this.bookForm.value.is_read.toString(),
-      this.bookForm.value.rating,
-      this.bookForm.value.notice,
-      this.bookForm.value.description,
-      this.bookForm.value.buy_place,
-      this.bookForm.value.payed,
-      this.bookForm.value.normal_price,
-    );
-
+    const newBook = new Book(this.bookForm.value);
     return newBook;
   }
 }

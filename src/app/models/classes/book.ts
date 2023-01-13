@@ -16,20 +16,19 @@ export class Book implements IBook {
     payed: number;
     normal_price: number;
 
-    constructor(id: number, title: string, author: string, genre: string, buyed_at: string,
-        is_read: Read, rating: Rating, notice: string, description: string, buy_place: string, payed: number, normal_price: number) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.buyed_at = buyed_at;
-        this.is_read = is_read;
-        this.rating = rating;
-        this.notice = notice;
-        this.description = description;
-        this.buy_place = buy_place;
-        this.payed = payed;
-        this.normal_price = normal_price;
+    constructor(args: Book) {
+        this.id = args.id;
+        this.title = args.title;
+        this.author = args.author;
+        this.genre = args.genre;
+        this.buyed_at = args.buyed_at;
+        this.is_read = args.is_read;
+        this.rating = args.rating;
+        this.notice = args.notice;
+        this.description = args.description;
+        this.buy_place = args.buy_place;
+        this.payed = args.payed;
+        this.normal_price = args.normal_price;
     }
 
     get serializedBook(): IBook {
