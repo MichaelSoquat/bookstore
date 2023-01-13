@@ -1,1 +1,87 @@
-<p>edit-book works!</p>
+<form [formGroup]="bookForm" #form method="post" class="form">
+    <div class="part-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Titel</mat-label>
+            <input matInput type="text" id="title" formControlName="title">
+            <mat-icon matSuffix>title</mat-icon>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Autor</mat-label>
+            <input matInput type="text" id="author" formControlName="author">
+            <mat-icon matSuffix>person</mat-icon>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Genre</mat-label>
+            <input matInput type="text" id="genre" formControlName="genre">
+            <mat-icon matSuffix>library_books</mat-icon>
+
+        </mat-form-field>
+
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Bewertung</mat-label>
+            <input matInput type="number" id="rating" max="5" min="0" formControlName="rating">
+            <mat-icon matSuffix>star</mat-icon>
+
+        </mat-form-field>
+
+
+
+    </div>
+    <div class="part-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Kaufort</mat-label>
+            <input matInput type="text" id="buy_place" formControlName="buy_place">
+            <mat-icon matSuffix>shopping_cart</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Gezahlt</mat-label>
+            <input matInput type="number" min="0" id="payed" formControlName="payed">
+            <mat-icon matSuffix>payment</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Normalpreis</mat-label>
+            <input matInput type="number" min="0" id="normal_price" formControlName="normal_price">
+            <mat-icon matSuffix>attach_money</mat-icon>
+        </mat-form-field>
+
+        <div class="checkbox">
+            <mat-label>Bereits gelesen?</mat-label>
+            <mat-checkbox formControlName="is_read" class="example-margin">
+            </mat-checkbox>
+        </div>
+
+    </div>
+    <div class="part-form">
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Gekauft am</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="buyed_at">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Beschreibung</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Notiz</mat-label>
+            <textarea matInput formControlName="notice"></textarea>
+        </mat-form-field>
+    </div>
+</form>
+<div class="button-container">
+    <button mat-raised-button type="submit" (click)="onSubmit()">Buch editieren</button>
+    <button mat-raised-button type="click" routerLink="/">Zurück</button>
+</div>

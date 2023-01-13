@@ -10,6 +10,7 @@ import { selectBooksState } from 'src/app/state/books.selectors';
 import { Observable, Subscription } from 'rxjs';
 import { BooksState } from 'src/app/state/books.reducer';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BookService } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-main',
@@ -26,7 +27,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   dataSource!: MatTableDataSource<IBook[]>;
   books$: Observable<BooksState | unknown> = this.store.select(selectBooksState);
   bookSubscription!: Subscription;
-  constructor(private store: Store, private _snackBar: MatSnackBar,) { }
+  constructor(private store: Store, private _snackBar: MatSnackBar, private bookService: BookService) { }
 
   ngOnInit(): void {
     this.subscribeToBooks();
@@ -62,8 +63,8 @@ export class MainComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  editBook(id: number) {
-    // edit book --> edit page with form
+  editBook(book: IBook) {
+    this.bookService.setEditFormValue(book);
   }
 
   deleteBook(id: number) {

@@ -14,12 +14,14 @@ import { IBook } from "../models/interfaces/book";
 export class BooksEffects {
     constructor(private actions$: Actions, private bookService: BookService) { }
 
+    // get books
     getBooks$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(getBooks),
         switchMap(() => this.bookService.getBooks()),
         map((books: Book[]) => BooksActions.getBooksSuccess({ payload: books }))
     ));
 
+    // add book
     addBook$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(BooksActions.addBook),
         switchMap((action) => this.bookService.addBook(action.payload)),
@@ -31,6 +33,23 @@ export class BooksEffects {
         switchMap(() => this.bookService.getBooks()),
         map((books: Book[]) => BooksActions.getBooksSuccess({ payload: books }))
     ));
+
+
+    // edit book
+
+    editBook$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(BooksActions.updateBook),
+        switchMap((action) => this.bookService.editBook(action.payload)),
+        map((book: IBook) => BooksActions.updateBookSuccess({ payload: book }))
+    ));
+
+    editBookSuccess$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(BooksActions.updateBookSuccess),
+        switchMap(() => this.bookService.getBooks()),
+        map((books: Book[]) => BooksActions.getBooksSuccess({ payload: books }))
+    ));
+
+    // delete book
 
     deleteBook$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(BooksActions.deleteBook),

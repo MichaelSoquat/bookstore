@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Book } from '../models/classes/book';
 import { IBook } from '../models/interfaces/book';
-import { deleteBook } from '../state/books.actions';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-
+  editFormValue!: IBook;
   constructor(private http: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
@@ -27,5 +27,18 @@ export class BookService {
 
   deleteBook(id: number): Observable<any> {
     return this.http.delete<Object>('http://127.0.0.1:8000/api/deleteBook/' + id, this.httpOptions);
+  }
+
+  editBook(payload: {id:number, book:IBook}): Observable<IBook> {
+    return this.http.put<Object>('http://127.0.0.1:8000/api/updateBook/' + payload.id + "/", payload.book, this.httpOptions).
+      pipe(map(response => response as IBook));
+  }
+
+  setEditFormValue(book: IBook) {
+    this.editFormValue = book;
+  }
+
+  getEditFormValue(): IBook {
+    return this.editFormValue;
   }
 }
