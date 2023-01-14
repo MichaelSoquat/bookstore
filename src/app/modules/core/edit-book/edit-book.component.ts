@@ -69,7 +69,7 @@ export class EditBookComponent implements OnInit {
 
     this.bookForm.reset();
     this.router.navigate(['/']);
-    this._snackBar.open('Buch hinzugefügt', 'Ok', {
+    this._snackBar.open('Änderungen gespeichert', 'Ok', {
       duration: 2000,
     });
   }
